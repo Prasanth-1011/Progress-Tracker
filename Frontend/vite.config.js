@@ -9,7 +9,7 @@ export default defineConfig({
     ],
     server: {
         proxy: {
-            '/api': 'http://localhost:5000'
+            '/api': 'https://progress-tracker-rch4.onrender.com'
         }
     }
 })
