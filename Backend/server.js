@@ -4,8 +4,25 @@ import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 5000;
+const allowedOrigins = [
+    'https://vercel.com/siva-prasanths-projects/progress-tracker/FFBJASDg8EsHuXqyA6xZbkhm8adz',
+    'https://progress-tracker-pi-orcin.vercel.app/'
+];
 
-app.use(cors());
+// Set up CORS options
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            // Allow requests with no origin (like mobile apps or Postman)
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+};
+
+// Use CORS with your options
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Connect to MongoDB
@@ -49,7 +66,7 @@ const checkUsername = (req, res, next) => {
 // Apply username check to all routes
 app.use(checkUsername);
 
-const baseUrl = 'https://vercel.com/siva-prasanths-projects/progress-tracker/FFBJASDg8EsHuXqyA6xZbkhm8adz';
+const baseUrl = 'https://progress-tracker-pi-orcin.vercel.app';
 
 // Get all subjects
 app.get(`${baseUrl}/api/subjects`, async (req, res) => {
@@ -149,5 +166,4 @@ app.delete(`${baseUrl}/api/learning-entries/:id`, async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
-
 });
