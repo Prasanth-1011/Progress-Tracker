@@ -49,8 +49,10 @@ const checkUsername = (req, res, next) => {
 // Apply username check to all routes
 app.use(checkUsername);
 
+const baseUrl = 'https://progress-tracker-pi-orcin.vercel.app';
+
 // Get all subjects
-app.get('/api/subjects', async (req, res) => {
+app.get(`${baseUrl}/api/subjects`, async (req, res) => {
     try {
         const subjects = await Subject.find({ username: req.username }).sort({ createdAt: -1 });
         res.json(subjects);
@@ -60,7 +62,7 @@ app.get('/api/subjects', async (req, res) => {
 });
 
 // Get learning entries grouped by subject
-app.get('/api/learning-entries/grouped', async (req, res) => {
+app.get(`${baseUrl}/api/learning-entries/grouped`, async (req, res) => {
     try {
         const entries = await LearningEntry.find({ username: req.username }).sort({ date: -1 });
 
@@ -79,7 +81,7 @@ app.get('/api/learning-entries/grouped', async (req, res) => {
 });
 
 // Add new subject
-app.post('/api/subjects', async (req, res) => {
+app.post(`${baseUrl}/api/subjects`, async (req, res) => {
     try {
         const newSubject = new Subject({
             username: req.username,
@@ -93,7 +95,7 @@ app.post('/api/subjects', async (req, res) => {
 });
 
 // Delete subject
-app.delete('/api/subjects/:id', async (req, res) => {
+app.delete(`${baseUrl}/api/subjects/:id`, async (req, res) => {
     try {
         const subject = await Subject.findOneAndDelete({
             _id: req.params.id,
@@ -116,7 +118,7 @@ app.delete('/api/subjects/:id', async (req, res) => {
 });
 
 // Add learning entry
-app.post('/api/learning-entries', async (req, res) => {
+app.post(`${baseUrl}/api/learning-entries`, async (req, res) => {
     try {
         const newEntry = new LearningEntry({
             username: req.username,
@@ -130,7 +132,7 @@ app.post('/api/learning-entries', async (req, res) => {
 });
 
 // Delete learning entry
-app.delete('/api/learning-entries/:id', async (req, res) => {
+app.delete(`${baseUrl}/api/learning-entries/:id`, async (req, res) => {
     try {
         const entry = await LearningEntry.findOneAndDelete({
             _id: req.params.id,
