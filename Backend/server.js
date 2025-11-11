@@ -4,10 +4,7 @@ import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 5000;
-const allowedOrigins = [
-    'https://vercel.com/siva-prasanths-projects/progress-tracker/FFBJASDg8EsHuXqyA6xZbkhm8adz',
-    'https://progress-tracker-pi-orcin.vercel.app/'
-];
+const allowedOrigins = 'https://vercel.com/siva-prasanths-projects/progress-tracker/FFBJASDg8EsHuXqyA6xZbkhm8adz';
 
 // Set up CORS options
 const corsOptions = {
