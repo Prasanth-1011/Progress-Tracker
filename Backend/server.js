@@ -63,7 +63,7 @@ const checkUsername = (req, res, next) => {
 // Apply username check to all routes
 app.use(checkUsername);
 
-const baseUrl = 'https://progress-tracker-pi-orcin.vercel.app';
+const baseUrl = 'https://vercel.com/siva-prasanths-projects/progress-tracker/FFBJASDg8EsHuXqyA6xZbkhm8adz';
 
 // Get all subjects
 app.get(`${baseUrl}/api/subjects`, async (req, res) => {
